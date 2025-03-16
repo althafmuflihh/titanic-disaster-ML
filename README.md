@@ -1,78 +1,83 @@
-# Groundwater Hardness Prediction with LightGBM
-https://www.kaggle.com/competitions/titanic/overview
+# Titanic Survival Prediction
 
-## Project Objective
-This project aims to predict the hardness of groundwater in various regions of Mexico based on chemical composition. The goal is to assist in addressing water quality issues in Mexico by leveraging machine learning techniques, specifically using LightGBM.
+This project applies machine learning to predict survival outcomes for passengers on the Titanic. A neural network model was trained to classify passengers based on various features.
 
-## Methods Used
-* Machine Learning
-* LightGBM Regression
-* Data Preprocessing & Feature Engineering
+## Dataset
+The dataset comes from the [Kaggle Titanic Competition](https://www.kaggle.com/competitions/titanic/overview). It contains information about Titanic passengers, including their demographics, ticket details, and survival status.
 
-## Evaluation Metrics
-* R-squared (R²) Score
+## Model Performance
+- **Validation Accuracy:** 81.56%
+- **Final Kaggle Score:** 0.78229
 
-## Language
-* Python
+## Features Used
+- Passenger class
+- Sex
+- Age
+- Family size
+- Fare
+- Title extracted from names
+- Alone status
 
-## Modules Used
-* Pandas
-* NumPy
-* Sklearn
-* LightGBM
+## Preprocessing Steps
+- Extracted titles from names and mapped them to standardized categories
+- Filled missing age values based on grouped mean by title
+- Converted categorical variables (e.g., Sex) into numerical values
+- Created new features such as Family Size and IsAlone
+- Normalized numerical features
 
-## Step-by-Step Process
+## Model Architecture
+A simple feedforward neural network built using TensorFlow/Keras:
+- **Layer 1:** Dense (16 neurons, ReLU activation)
+- **Layer 2:** Dense (8 neurons, ReLU activation)
+- **Output Layer:** Dense (1 neuron, Sigmoid activation)
 
-1. **Dataset Analysis & Preprocessing**
-    * Load and inspect the dataset
-    * Check missing values and handle them accordingly
+## Training
+- Optimizer: Adam
+- Loss Function: Binary Crossentropy
+- Batch Size: 8
+- Epochs: 50
+- Class Weights: {0: 0.80, 1: 1.33} to handle class imbalance
 
-2. **Feature Engineering**
-    * Create new features based on chemical composition
-    * Standardize numerical features for better model performance
+## Results
+- **Classification Report:**
+  ```
+              precision    recall  f1-score   support
 
-3. **Data Preparation**
-    * Remove irrelevant columns
-    * Split data into training and testing sets (80:20 split)
+           0       0.88      0.87      0.88       105
+           1       0.82      0.84      0.83        74
 
-4. **Model Training**
-    * Train a LightGBM regressor with hyperparameter tuning
-    * Implement cross-validation to improve generalization
+    accuracy                           0.85       179
+   macro avg       0.85      0.85      0.85       179
+weighted avg       0.86      0.85      0.86       179
+  ```
+- **Final Test Accuracy:** 81.56%
+- **Final Test Loss:** 0.4391
 
-5. **Hyperparameter Tuning**
-    * Use GridSearchCV to find optimal parameters
-    * Optimize learning rate, max depth, and boosting rounds
+## Submission
+The final predictions were saved and submitted to Kaggle using:
+```python
+submission.to_csv('submission.csv', index=False, sep=',')
+```
 
-6. **Model Evaluation**
-    * **Metric** | **Training Data** | **Test Data**
-        * R² Score | 0.9211 | 0.7662
+## Installation & Usage
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/yourusername/titanic-ml.git
+   cd titanic-ml
+   ```
+2. Install dependencies:
+   ```sh
+   pip install -r requirements.txt
+   ```
+3. Run the model training script:
+   ```sh
+   python train.py
+   ```
+4. Generate predictions for test data:
+   ```sh
+   python predict.py
+   ```
 
-7. **Results**
-    * Achieved an R² score of 0.9211 on the training set and 0.7662 on the validation set.
-    * Scored **0.91952** in the Data Science Academy COMPFEST 2024 competition.
+## Acknowledgments
+This project was developed as part of the Kaggle Titanic Competition and achieved a score of **0.78229**.
 
-## Titanic Classification with Neural Network
-
-Additionally, a classification model was built for Titanic survival prediction using a neural network.
-
-### Model Performance
-
-* **Classification Report**
-  
-    | Class | Precision | Recall | F1-score | Support |
-    |-------|------------|------------|------------|------------|
-    | Not Survived (0) | 0.88 | 0.87 | 0.88 | 105 |
-    | Survived (1) | 0.82 | 0.84 | 0.83 | 74 |
-
-* **Overall Metrics**
-  * Accuracy: **0.85**
-  * Macro Avg: Precision = **0.85**, Recall = **0.85**, F1-score = **0.85**
-  * Weighted Avg: Precision = **0.86**, Recall = **0.85**, F1-score = **0.86**
-
-* **Neural Network Training Performance**
-  * Final Validation Accuracy: **0.8156**
-  * Test Loss: **0.4391**
-  * Test Accuracy: **0.8156**
-
-## Conclusion
- * Scored **0.78229** on Kaggle competition: [Titanic - Machine Learning from Disaster](https://www.kaggle.com/competitions/titanic/overview)
