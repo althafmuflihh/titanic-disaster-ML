@@ -1,5 +1,5 @@
 # Titanic Survival Prediction with Neural Networks
-
+https://www.kaggle.com/competitions/titanic/overview
 ## Project Objective
 This project aims to develop a neural network model to predict Titanic passenger survival based on various features. The model is optimized using feature engineering and class balancing techniques, with performance evaluated through accuracy, precision, recall, and F1-score.
 
@@ -73,4 +73,4 @@ This project aims to develop a neural network model to predict Titanic passenger
     * **Final Test Loss:** 0.4391
 
 ## Results
-Scored **0.78229** in the leaderboard of the Kaggle Titanic Competition.
+Scored **0.78229** in the leaderboard of the [Kaggle Titanic Competition](https://www.kaggle.com/competitions/titanic/overview).
